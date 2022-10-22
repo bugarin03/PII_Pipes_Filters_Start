@@ -18,12 +18,12 @@ namespace CompAndDel
         public IPicture GetPicture(string path)
         {
             Picture picture = new Picture(1, 1);
-            using (var image = Image.Load(path))
+            using (var image = SixLabors.ImageSharp.Image.Load(path))
             {
                 picture.Resize(image.Width, image.Height);
                 for (int h = 0; h < image.Height; h++)
                 {
-                    for (int w = 0; w <image.Width; w++)
+                    for (int w = 0; w < image.Width; w++)
                     {
                         picture.SetColor(w, h, Color.FromArgb(image[w, h].A, image[w, h].R, image[w, h].G, image[w, h].B));
                     }
@@ -41,7 +41,7 @@ namespace CompAndDel
         {
             int width = picture.Width;
             int height = picture.Height;
-            using(Image<Rgba32> image = new Image<Rgba32>(width, height)) // creates a new image with all the pixels set as transparent
+            using (Image<Rgba32> image = new Image<Rgba32>(width, height)) // creates a new image with all the pixels set as transparent
             {
                 for (int h = 0; h < picture.Height; h++)
                 {
