@@ -9,18 +9,22 @@ namespace CompAndDel
     {
         static void Main(string[] args)
         {
-            //Creación de la instancia de la clase Picture
-            Picture image = new Picture(604,340);
+            //Obtención de la imagen 
             PictureProvider provider = new PictureProvider();
-            //Aplicación de FilterGreyscale
-            FilterGreyscale GreyFilter= new FilterGreyscale();
-            IPicture filter1 = GreyFilter.Filter(image);
-            provider.SavePicture(filter1,@"..\Imagenes");
-            //Aplicación de FilterNegative
+            IPicture picture = provider.GetPicture(@"..\Imagenes\beer.jpg");
+            //Creacion de los filtros
             FilterNegative NegativeFilter = new FilterNegative();
-            IPicture filter2 = NegativeFilter.Filter(filter1);
+            FilterGreyscale GreyFilter= new FilterGreyscale();
+            //Ahora empezaremos con la creacion del  circuito que realiza la imagen
+            PipeNull pipeNull = new PipeNull();
+            //Segundo Filtro
+            PipeSerial pipe2 = new PipeSerial(NegativeFilter, pipeNull);
+            //Primer Filtro
+            PipeSerial pipe1 = new PipeSerial(GreyFilter, pipe2);
+            //Comienzo del recorrido de la imagen
+            IPicture initialpicture = pipe1.Send(picture);
             //Parte final, guardado de la imagen
-            provider.SavePicture(image, @"PathToImageToSave.jpg");
+            provider.SavePicture(picture, @"..\Imagenes\nuevo.jpg");
         }
     }
 }
