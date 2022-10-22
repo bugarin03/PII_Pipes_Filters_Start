@@ -14,6 +14,7 @@ namespace CompAndDel
         /// </summary>
         /// <param name="path">El path del archivo desde el cual leer la imagen.</param>
         /// <returns>La imagen leida.</returns>
+        public string Image { get; set; }
         public IPicture GetPicture(string path)
         {
             Picture picture = new Picture(1, 1);
