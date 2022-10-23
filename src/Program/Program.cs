@@ -11,28 +11,23 @@ namespace CompAndDel
         {
             //Obtención de la imagen 
             PictureProvider provider = new PictureProvider();
-            IPicture picture = provider.GetPicture(@".\Imagenes\luke.jpg");
+            IPicture picture = provider.GetPicture(@".\Imagenes\beer.jpg");
             //Creacion de los filtros
             FilterNegative NegativeFilter = new FilterNegative();
             FilterGreyscale GreyFilter = new FilterGreyscale();
+            FilterBlurConvolution BlurConvolutionFilter = new FilterBlurConvolution();
             //Ahora empezaremos con la creacion del  circuito que realiza la imagen
             PipeNull pipeNull = new PipeNull();
             //Segundo Filtro
             PipeSerial pipe2 = new PipeSerial(NegativeFilter, pipeNull);
+            //Condicional
+            CognitivePipe conditionalPipe = new CognitivePipe(BlurConvolutionFilter,pipe2);
             //Primer Filtro
-            PipeSerial pipe1 = new PipeSerial(GreyFilter, pipe2);
+            PipeSerial pipe1 = new PipeSerial(GreyFilter, conditionalPipe);
             //Comienzo del recorrido de la imagen
-            IPicture initialpicture = pipe1.Send(picture, @".\Imagenes\luke.jpg");
+            IPicture initialpicture = pipe1.Send(picture, @".\Imagenes\beer.jpg");
             //Parte final, guardado de la imagen
             provider.SavePicture(initialpicture, @".\Imagenes\nuevo.jpg");
         }
     }
 }
-
-
-/*
-Dudas:
-- ¿Tengo que crear una instancia de la clase picture o simplemente con el metodo de getimage sirve?
--
-
-*/
