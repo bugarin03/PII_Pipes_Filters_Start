@@ -8,6 +8,7 @@ using CompAndDel;
 namespace CompAndDel.Pipes
 {
     public class PipeFork : IPipe
+    
     {
         IPipe next2Pipe;
         IPipe nextPipe;
@@ -29,10 +30,17 @@ namespace CompAndDel.Pipes
         /// y envía la original por una cañería y el duplicado por otra.
         /// </summary>
         /// <param name="picture">imagen a filtrar y enviar a las siguientes cañerías</param>
-        public IPicture Send(IPicture picture)
+        public IPicture Send(IPicture picture, string path)
         {
-            next2Pipe.Send(picture.Clone());
-            return this.nextPipe.Send(picture);
+            next2Pipe.Send(picture.Clone(),path);
+            this.Save(picture);
+            return this.nextPipe.Send(picture,  $@".\Imagenes\{picture.ToString()}clone.jpg");
+        }
+
+        public void Save(IPicture picture)
+        {
+            PictureProvider provider = new PictureProvider();
+            provider.SavePicture(picture, $@".\Imagenes\{nameof(picture)}clone.jpg");
         }
     }
 }

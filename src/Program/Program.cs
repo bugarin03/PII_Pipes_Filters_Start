@@ -11,10 +11,10 @@ namespace CompAndDel
         {
             //Obtención de la imagen 
             PictureProvider provider = new PictureProvider();
-            IPicture picture = provider.GetPicture(@"..\Imagenes\beer.jpg");
+            IPicture picture = provider.GetPicture(@".\Imagenes\luke.jpg");
             //Creacion de los filtros
             FilterNegative NegativeFilter = new FilterNegative();
-            FilterGreyscale GreyFilter= new FilterGreyscale();
+            FilterGreyscale GreyFilter = new FilterGreyscale();
             //Ahora empezaremos con la creacion del  circuito que realiza la imagen
             PipeNull pipeNull = new PipeNull();
             //Segundo Filtro
@@ -22,9 +22,9 @@ namespace CompAndDel
             //Primer Filtro
             PipeSerial pipe1 = new PipeSerial(GreyFilter, pipe2);
             //Comienzo del recorrido de la imagen
-            IPicture initialpicture = pipe1.Send(picture);
+            IPicture initialpicture = pipe1.Send(picture, @".\Imagenes\luke.jpg");
             //Parte final, guardado de la imagen
-            provider.SavePicture(picture, @"..\Imagenes\nuevo.jpg");
+            provider.SavePicture(initialpicture, @".\Imagenes\nuevo.jpg");
         }
     }
 }

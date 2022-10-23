@@ -15,7 +15,7 @@ namespace CompAndDel.Pipes
         /// </summary>
         /// <param name="picture">Imagen a recibir</param>
         /// <returns>La misma imagen</returns>
-        public IPicture Send(IPicture picture)
+        public IPicture Send(IPicture picture, string image)
         {
             this.image = picture;
             return this.image;

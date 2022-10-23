@@ -1,9 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <OutputType>Library</OutputType>
     <AssemblyName>PipesAndFilters</AssemblyName>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2"/>
+    <PackageReference Include="Nito.AsyncEx" Version="5.1.2"/>
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0005" />
   </ItemGroup>
   <ItemGroup>
@@ -11,3 +14,4 @@
     <ProjectReference Include="..\..\..\PII_CognitiveAPI\src\Library\Library.csproj" />
   </ItemGroup>
 </Project>
+
