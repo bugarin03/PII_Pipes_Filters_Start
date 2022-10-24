@@ -47,17 +47,9 @@ namespace CompAndDel.Pipes
         {
             var twitter = new TwitterImage();
             picture = this.filtro.Filter(picture);
-            this.Save(picture);
-            Console.WriteLine(this.filtro.ToString());
-            Console.WriteLine(twitter.PublishToTwitter($"{this.filtro.ToString()}",$@".\Imagenes\{this.filtro.ToString()}.jpg"));
-            return this.nextPipe.Send(picture,$@".\Imagenes\{this.filtro.ToString()}.jpg");
+            Console.WriteLine(this.filtro);
+            Console.WriteLine(twitter.PublishToTwitter($"{this.filtro}",$@".\Imagenes\{this.filtro}.jpg"));
+            return this.nextPipe.Send(picture,$@".\Imagenes\{this.filtro}.jpg");
         }
-
-        public void Save(IPicture picture)
-        {
-            PictureProvider provider = new PictureProvider();
-            IPicture picturewithfilter = this.filtro.Filter(picture);
-            provider.SavePicture(picture, $@".\Imagenes\{this.filtro.ToString()}.jpg");
-        } 
     }
 }

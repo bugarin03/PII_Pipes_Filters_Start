@@ -51,16 +51,7 @@ namespace CompAndDel.Pipes
         {
             CognitiveFace cog = new CognitiveFace(true, System.Drawing.Color.GreenYellow);
             cog.Recognize(@$"{image}");
-            if (cog.FaceFound)
-            {
-                this.Face = true;
-                return true;
-            }
-            else
-            {
-                this.Face = false;
-                return false;
-            }
+            return cog.FaceFound;
         }
 
         /// <summary>
@@ -91,9 +82,3 @@ namespace CompAndDel.Pipes
         }
     }
 }
-
-
-/*
-    Sería aplicar el filtro como ultimo filtro?
-    falta aplicar el filtro según la condicion de la cara 
-*/
