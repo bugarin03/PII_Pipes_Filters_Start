@@ -72,12 +72,11 @@ namespace CompAndDel.Pipes
             FilterBlurConvolution filter = new FilterBlurConvolution();
             var twitter = new TwitterImage();
 
-            if (this.DetectFace(path)==true)
+            if (this.DetectFace(path))
             {
                 picture = this.filtro.Filter(picture);
                 this.Save(picture);
                 Console.WriteLine(this.filtro.ToString());
-                Console.WriteLine("hola");
             }
             
             Console.WriteLine(twitter.PublishToTwitter($"{this.filtro.ToString()}", $@".\Imagenes\{this.filtro.ToString()}.jpg"));

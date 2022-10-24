@@ -19,13 +19,13 @@ namespace CompAndDel
             //Ahora empezaremos con la creacion del  circuito que realiza la imagen
             PipeNull pipeNull = new PipeNull();
             //Segundo Filtro
-            PipeSerial pipe2 = new PipeSerial(NegativeFilter, pipeNull);
+            PipeSerial pipeSerial2 = new PipeSerial(NegativeFilter, pipeNull);
             //Condicional
-            CognitivePipe conditionalPipe = new CognitivePipe(BlurConvolutionFilter,pipe2);
+            CognitivePipe conditionalPipe = new CognitivePipe(BlurConvolutionFilter,pipeSerial2);
             //Primer Filtro
-            PipeSerial pipe1 = new PipeSerial(GreyFilter, conditionalPipe);
+            PipeSerial pipeSerial1 = new PipeSerial(GreyFilter, conditionalPipe);
             //Comienzo del recorrido de la imagen
-            IPicture initialpicture = pipe1.Send(picture, @".\Imagenes\luke.jpg");
+            IPicture initialpicture = pipeSerial1.Send(picture, @".\Imagenes\luke.jpg");
             //Parte final, guardado de la imagen
             provider.SavePicture(initialpicture, @".\Imagenes\nuevo.jpg");
         }
